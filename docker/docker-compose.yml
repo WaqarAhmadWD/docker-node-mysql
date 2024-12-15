@@ -11,6 +11,7 @@ services:
       - node_modules:/usr/src/app/node_modules
     networks:
       - app_network
+
   mysql:
     image: mysql:5.7
     environment:
@@ -20,6 +21,16 @@ services:
       MYSQL_PASSWORD: 123@123@sql
     ports:
       - "3306:3306"
+    networks:
+      - app_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: 123@123@sql
+    ports:
+      - "8080:80"
     networks:
       - app_network
 
