@@ -1,0 +1,119 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Email</title>
+    <style>
+      body { margin: 100px; font-size: large; } .flex { display: flex; gap: 50%; font-size: large; } .span {
+      background-color: lightgray; } .table { width: 100%; border-collapse: collapse; } .table th, .table td { border:
+      1px solid #ddd; padding: 8px; } .table th { background-color: #f2f2f2; } .totalPrice { text-align: right;
+      margin-top: 10px; /* Adjust the margin as needed */ }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1><strong>Quotation</strong></h1>
+      <hr />
+    </div>
+
+    <div class='flex'>
+      <div>
+        <div>
+          <span class='span'>Quote No:
+          </span><strong>{{quotData.quoteNo}}</strong>
+        </div>
+
+        <div>
+          <span class='span'>To:</span><strong>{{quotData.customerTo}}</strong>
+        </div>
+
+        <div>
+          <span class='span'>Tel:</span><strong>{{quotData.customerTell}}</strong>
+        </div>
+
+        <div>
+          <span class='span'>Email:</span><strong>{{quotData.customerEmail}}</strong>
+        </div>
+
+      </div>
+
+      <div>
+        <div>
+          <span class='span'>Date:</span><strong>{{quotData.date}}</strong>
+        </div>
+        <div>
+          <span class='span'>Valid for:</span><strong>30 Days</strong>
+        </div>
+        <div>
+          <span class='span'>From:</span><strong>{{quotData.from}}</strong>
+        </div>
+        <div>
+          <span class='span'>Tel:</span><strong>{{quotData.tell}}</strong>
+        </div>
+
+        <div>
+          <span class='span'>Email:</span><strong>{{quotData.salesPersonEmail}}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p>Dear:
+        <strong>{{quotData.customerTo}}</strong></p>
+      <p>Re:
+        <strong>{{quotData.title}}</strong></p>
+      <p>{{quotData.note}}</p>
+    </div>
+
+    <div>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th><strong>Code</strong></th>
+            <th><strong>Description</strong></th>
+            <th><strong>Qty</strong></th>
+            <th><strong>Price</strong></th>
+            <th><strong>Total</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each quotData.quotationProducts}}
+            <tr>
+              <td>{{this.code}}</td>
+              <td>{{this.description}}</td>
+              <td>{{this.qty}}</td>
+              <td>{{this.product_sell_price}}</td>
+              <td>{{this.total_price}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <div class='totalPrice'>
+        <p class='span'><strong>Total(Ex VAT):
+            {{quotData.totalExVAT}}</strong></p>
+        <p class='span'><strong>VAT:
+            {{quotData.quot_vat}}</strong></p>
+        <p class='span'><strong>Total:
+            {{quotData.total_quot_price}}</strong></p>
+      </div>
+    </div>
+
+    <div>
+      <h2>Condition of sale</h2>
+      <p>{{quotData.condition_of_sale}}</p>
+
+      <h2>Delivery</h2>
+      <P>{{quotData.delivery}}</P>
+      <p>Account type: Platinum business account</p>
+      <p>Account no: 62653580037</p>
+      <p>Branch code: 252605</p>
+      <p>Branch name: North Rand Road</p>
+      <p>{{quotData.from}}</p>
+      <p>{{quotData.tell}}</p>
+      <p>{{quotData.salesPersonEmail}}</p>
+
+    </div>
+
+  </body>
+</html>

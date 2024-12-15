@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      token:
+      <div id="token"></div>
+    </div>
+    <div id="permission"></div>
+  </body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+    import {
+      getMessaging,
+      getToken,
+    } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-messaging.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyStvTiBjDvzyE-4WXVw18FnXLa8_0Qac",
+      authDomain: "test-b64ed.firebaseapp.com",
+      projectId: "test-b64ed",
+      storageBucket: "test-b64ed.firebasestorage.app",
+      messagingSenderId: "815903072205",
+      appId: "1:815903072205:web:f4aed8ed09e9f7ba59ae84",
+      measurementId: "G-DLXFK5JXNF",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Initialize Firebase Messaging
+    const messaging = getMessaging(app);
+
+    // Request notification permission
+    function requestPermission() {
+      console.log("Requesting permission...");
+      document.getElementById("permission").innerText =
+        "Requesting permission...";
+
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          console.log("Notification permission granted.");
+          document.getElementById("permission").innerText =
+            "Notification permission granted.";
+          fetchToken(); // Call the renamed function after permission is granted
+        } else {
+          console.log("Unable to get permission.");
+
+          document.getElementById("permission").innerText =
+            "Unable to get permission.";
+        }
+      });
+    }
+    requestPermission();
+
+    // Renamed the function to avoid conflict with the imported getToken function
+    function fetchToken() {
+      getToken(messaging, {
+        vapidKey:
+          "BJjkRKDwOFw_w2R6An0n05whw8AP5XZxt-IZ_LqvxQdI5r-3Y3rMmEGe8EP9KKFiC_bKccNpWN7TZeKJnexnP18",
+      })
+        .then((currentToken) => {
+          if (currentToken) {
+            console.log("Token:", currentToken);
+            document.getElementById("token").innerText = currentToken;
+          } else {
+            console.log("No registration token available.");
+          }
+        })
+        .catch((err) => {
+          console.log("An error occurred while retrieving token. ", err);
+        });
+    }
+  </script>
+</html>

@@ -1,0 +1,29 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Welcome to Our Service</title>
+    <style>
+      /* Add your CSS styles for the email here */ body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0;
+      padding: 20px; } .container { max-width: 600px; margin: 0 auto; background-color: #f9f9f9; padding: 20px;
+      border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); } .header { background-color: #78206E; color: #fff;
+      text-align: center; padding: 10px 0; border-radius: 5px 5px 0 0; } .content { padding: 20px 0; }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='header'>
+        <h1>OneSRCE CRM!</h1>
+      </div>
+      <div class='content'>
+        <p>Hi {{first_name}},</p>
+        <p>A new deal has been created and assigned to you by
+          {{createdBy}}.</p>
+        <p>Please log in to your account to view more details.</p>
+
+        <p>Thank you for joining us!</p>
+        <p>Best Regards,<br />Team OneSRCE</p>
+      </div>
+    </div>
+  </body>
+</html>
