@@ -5,11 +5,6 @@ const sendResponse = require("../utils/responseFormatter");
 const { generateCode } = require("../utils/generatecode");
 const { ROLES } = require("../constants");
 const { Users, sequelize } = require("../models");
-
-const {
-  sendRegistrationEmail,
-  sendForgotPasswordEmail,
-} = require("../utils/emailUtils");
 const { Op } = require("sequelize");
 
 module.exports = {
@@ -50,9 +45,6 @@ module.exports = {
 
       const code = generateCode();
       const codeExpiry = Date.now() + 3600000;
-
-      // Send OTP email after transaction is committed
-      await sendRegistrationEmail(email, assignedRole, code);
 
       const user = await Users.create(
         {
@@ -237,7 +229,6 @@ module.exports = {
                  This code will expire in one hour.<br><br>
                  If you did not request this, please ignore this email and your password will remain unchanged.<br><br>`;
 
-      await sendForgotPasswordEmail(email, message);
       await user.save();
 
       return sendResponse(res, 201, "check your email, please.");
